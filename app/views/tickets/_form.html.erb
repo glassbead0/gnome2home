@@ -34,11 +34,14 @@
 
   <div class="form-group">
     <%= f.label :departs_from, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-2 btn btn-default">
-      <%= @default_value %>
+    <div class="col-sm-3 btn btn-default">
+      <%= @ticket_time %>
     </div>
     <div class="col-sm-2">
-      <%= link_to 'Back', vans_path, class: 'btn btn-info' %>
+      <%= link_to vans_path, class: 'btn btn-info' do %>
+        <span class="glyphicon glyphicon-list-alt"></span>
+        Back
+      <% end %>
     </div>
   </div>
   <%= f.hidden_field :van_id, value: params[:van_id]  %>

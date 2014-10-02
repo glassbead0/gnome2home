@@ -15,14 +15,9 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
-    vans = Van.all
-    @times = []
-    vans.each do |v|
-      @times << v.stops[0].location + ' on ' + v.departure_time.strftime('%a: %b %e, %l:%M %P')
-    end
 
     van = Van.find(params[:van_id])
-    @default_value = van.stops[0].location + ' on ' + van.departure_time.strftime('%a: %b %e, %l:%M %P')
+    @ticket_time = van.stops[0].location + ' on ' + van.departure_time.strftime('%a: %b %e, %l:%M %P')
   end
 
   # GET /tickets/1/edit

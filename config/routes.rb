@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  resources :tickets
 
+  devise_for :admins
   devise_for :passengers
+
+  resources :tickets
   resources :vans
 
+  get 'contact' => 'contact#index'
   get 'map' => 'map#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
