@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :tickets
+
+  devise_for :passengers
+  resources :vans
+
+  get 'map' => 'map#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

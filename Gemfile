@@ -9,6 +9,7 @@ gem 'bootstrap-generators'
 gem 'font-awesome-rails'
 gem 'capybara'
 gem 'table_print'
+gem 'devise'
 
 
 group :development do
