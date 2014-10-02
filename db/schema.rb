@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141002170418) do
+ActiveRecord::Schema.define(version: 20141002192135) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -59,12 +59,19 @@ ActiveRecord::Schema.define(version: 20141002170418) do
     t.datetime "time"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "van_id"
   end
 
   create_table "tickets", force: true do |t|
-    t.boolean  "scanned",    default: false
+    t.boolean  "scanned",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "van_id"
+    t.integer  "passenger_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "qrcode"
   end
 
   create_table "vans", force: true do |t|
@@ -75,6 +82,7 @@ ActiveRecord::Schema.define(version: 20141002170418) do
     t.integer  "seats_occupied",  default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "admin_id"
   end
 
 end

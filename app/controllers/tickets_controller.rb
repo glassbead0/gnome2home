@@ -15,6 +15,14 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    vans = Van.all
+    @times = []
+    vans.each do |v|
+      @times << v.stops[0].location + ' on ' + v.departure_time.strftime('%a: %b %e, %l:%M %P')
+    end
+
+    van = Van.find(params[:van_id])
+    @default_value = van.stops[0].location + ' on ' + van.departure_time.strftime('%a: %b %e, %l:%M %P')
   end
 
   # GET /tickets/1/edit
@@ -69,6 +77,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:scanned)
+      params.require(:ticket).permit(:scanned, :first_name, :last_name, :email, :qrcode)
     end
 end

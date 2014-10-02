@@ -3,33 +3,23 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Van
   <% end %>
-  <h1>Listing vans</h1>
+  <h1>Find Your Ride</h1>
 </div>
 
-<div class="table-responsive container">
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-            <th>Driver</th>
-            <th>Direction</th>
-            <th>Seats available</th>
-            <th>Seats occupied</th>
-            <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs container" role="tablist">
+  <li class="active"><a href="#south" role="tab" data-toggle="tab">South Bound</a></li>
+  <li><a href="#north" role="tab" data-toggle="tab">North Bound</a></li>
+</ul>
 
-    <tbody>
-      <%= content_tag_for(:tr, @vans) do |van| %>
-            <td><%= van.driver %></td>
-            <td><%= van.direction %></td>
-            <td><%= van.seats_available %></td>
-            <td><%= van.seats_occupied %></td>
-            <td><%= link_to 'Show', van %></td>
-        <td><%= link_to 'Edit', edit_van_path(van) %></td>
-        <td><%= link_to 'Destroy', van, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tbody>
-  </table>
+<div class="tab-content container">
+  <div class="tab-pane active" id="south">
+    <%= render partial: 'schedule', locals: { :vans => @vans_south } %>
+  </div>
+  <div class="tab-pane" id="north">
+    <%= render partial: 'schedule', locals: { :vans => @vans_north } %>
+
+  </div>
+
 </div>
+

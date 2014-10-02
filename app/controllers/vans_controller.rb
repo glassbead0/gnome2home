@@ -4,7 +4,8 @@ class VansController < ApplicationController
   # GET /vans
   # GET /vans.json
   def index
-    @vans = Van.all
+    @vans_south = Van.where(direction: 'S')
+    @vans_north = Van.where(direction: 'N')
   end
 
   # GET /vans/1

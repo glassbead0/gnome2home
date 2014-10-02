@@ -25,6 +25,12 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :departure_time, :class => "col-sm-2 control-label" %>
+    <div class="col-sm-4">
+      <%= f.datetime_select :departure_time, ampm: true, :class => "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :seats_available, :class => "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.number_field :seats_available, :class => "form-control" %>
