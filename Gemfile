@@ -10,6 +10,9 @@ gem 'font-awesome-rails'
 gem 'capybara'
 gem 'table_print'
 gem 'devise'
+gem 'factory_girl_rails'
+gem 'faker'
+gem 'omniauth'
 
 
 group :development do

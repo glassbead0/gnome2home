@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Van, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many :stops }
+  it { should have_many :tickets }
+  it { should have_many :passengers, through: :tickets}
+  it { should have_one :admin }
 end
