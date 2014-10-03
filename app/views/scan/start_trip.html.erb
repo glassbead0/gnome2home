@@ -1,0 +1,15 @@
+<div class="page-header">
+  <h1>Select Trip to Start</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    <%= label_tag :van %>
+    <%= select_tag :van, options_for_select(@my_vans) %>
+  </div>
+
+  <div>
+    <%= label_tag :van2 %>
+    <%= select_tag :van, options_for_select(@other_vans), include_blank: true %>
+  </div>
+</div>

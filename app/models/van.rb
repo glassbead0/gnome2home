@@ -2,7 +2,7 @@ class Van < ActiveRecord::Base
   has_many :stops, dependent: :destroy
   has_many :tickets
   has_many :passengers, through: :tickets
-  has_one :admin # driver
+  belongs_to :admin # driver
 
   def self.seed_data! #only necessary for testing. this is found in seeds.rb
 

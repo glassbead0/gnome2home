@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'scan/ticket'
+  get 'scan/start_trip'
 
   devise_for :admins
   devise_for :passengers

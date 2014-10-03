@@ -4,7 +4,7 @@
     <li class="divider"></li>
     <li><%= link_to 'Logout', destroy_passenger_session_path, method: :delete %></li>
   <% elsif admin_signed_in? %>
-    <li><%= link_to 'Some admin stuff', root_path %></li>
+    <li><%= link_to 'Start Trip', '/scan/start_trip' %></li>
     <li class="divider"></li>
     <li><%= link_to 'Logout', destroy_admin_session_path, method: :delete %></li>
 
