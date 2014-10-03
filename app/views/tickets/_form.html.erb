@@ -44,8 +44,9 @@
       <% end %>
     </div>
   </div>
-  <%= f.hidden_field :van_id, value: params[:van_id]  %>
 
+  <%= f.hidden_field :van_id, value: params[:van_id]  %>
+  <%= f.hidden_field :passenger_id, value: current_passenger.id  %>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit 'Buy Ticket', :class => "btn btn-primary" %>

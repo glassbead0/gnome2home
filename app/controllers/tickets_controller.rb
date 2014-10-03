@@ -30,9 +30,11 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-    @ticket.qrcode = "http://localhost:3000/scan?confirmation=#{@ticket.id}"
     respond_to do |format|
       if @ticket.save
+        @ticket.qrcode = "http://localhost:3000/scan/ticket?confirmation=#{@ticket.id}"
+        @ticket.save
+        Recipt.send_recipt(@ticket).deliver
         format.html { redirect_to @ticket, notice: 'Thank you for riding Gnome2Home. You will receive an email shortly with your QR code and confirmation number' }
         format.json { render :show, status: :created, location: @ticket }
       else
@@ -74,6 +76,6 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:scanned, :first_name, :last_name, :email, :qrcode)
+      params.require(:ticket).permit(:scanned, :first_name, :last_name, :email, :qrcode, :van_id, :passenger_id)
     end
 end

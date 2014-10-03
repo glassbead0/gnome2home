@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'scan/ticket'
+
   devise_for :admins
   devise_for :passengers
 

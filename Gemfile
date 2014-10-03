@@ -16,7 +16,7 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'launchy'
 gem 'rspec-collection_matchers'
-
+gem 'rqrcode'
 
 
 group :development do
