@@ -32,7 +32,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new(ticket_params)
     respond_to do |format|
       if @ticket.save
-        @ticket.qrcode = "http://gnome2home.com/scan/ticket?confirmation=#{@ticket.id}"
+        @ticket.qrcode = "http://gnome2home.herokuapp.com/scan/ticket?confirmation=#{@ticket.id}"
         @ticket.van.seats_available -= 1
         @ticket.van.save
         @ticket.save
