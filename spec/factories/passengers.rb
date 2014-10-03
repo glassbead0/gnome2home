@@ -2,11 +2,11 @@
 
 FactoryGirl.define do
   factory :passenger do
-    email "MyString"
-    first_name "MyString"
-    last_name "MyString"
-    password "MyString"
-    password_confirmation "MyString"
-    phone "MyString"
+    email { Faker::Internet.email }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    password { Faker::Internet.password }
+    password_confirmation { password }
+    phone { Faker::PhoneNumber.phone_number }
   end
 end

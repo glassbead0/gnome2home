@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :van do
-    driver "MyString"
-    direction "MyString"
-    departure_time "MyString"
-    seats_available "MyString"
-    seats_occupied "MyString"
+    driver "Daniel"
+    direction "S"
+    departure_time Time.local(2014, 10, 3, 8, 30) # departs from CSU on Fri: Oct 3, 8:30 am
+    seats_available 14
+    seats_occupied 0
   end
 end
