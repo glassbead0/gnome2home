@@ -2,43 +2,48 @@ require 'rails_helper'
 
 feature 'buying a ticket' do
   scenario 'logs in first' do
-    van = FactoryGirl.create(:van)
+    Van.seed_data!
+    van = Van.first
 
     visit '/'
     click_link 'Create Account'
 
-    expect(page).to have_link 'Sign up with Facebook'
+   # expect(page).to have_link 'Sign up with Facebook'
 
     fill_in 'First name', with: 'Aaron'
     fill_in 'Last name', with: 'Glasenapp'
-    fill_in 'email', with: 'glassbead@gmail.com'
-    fill_in 'phone', with: '7202379141'
+    fill_in 'Email', with: 'glassbead@gmail.com'
+    fill_in 'Phone', with: '7202379141'
+    fill_in 'Password', with: 'myPassword'
+    fill_in 'Password confirmation', with: 'myPassword'
 
-    click_link 'Create account'
+    click_button 'Create account'
 
-    expect(page).to have_text 'Thank you for creating an account'
+    expect(page).to have_text 'Welcome! You have signed up successfully.'
     expect(page).to have_text 'glassbead@gmail.com'
     expect(page).to have_text 'Logout'
 
     click_link 'View Schedule'
 
-    click_link '/tickets/new?van_id=1'
+    click_link 'ticket_for_van_1'
 
     expect(page).to have_text 'Buy Your Ticket Here'
 
-    expect(page).to have_text 'Aaron'
-    expect(page).to have_text 'Glasenapp'
-    expect(page).to have_text 'glassbead@gmail.com'
-    expect(page).to have_text 'CSU on Fri: Oct 3, 8:30 am'
 
-    click_link 'Buy ticket'
+    expect(find_field('ticket_first_name').value).to eq 'Aaron'
+    expect(find_field('ticket_last_name').value).to eq 'Glasenapp'
+    expect(find_field('ticket_email').value).to eq 'glassbead@gmail.com'
+
+    expect(page).to have_text 'CSU on Thu: Oct 2, 2:00 pm'
+
+    click_button 'Buy Ticket'
 
     # go to wepay
     # return from wepay
 
     expect(page).to have_text 'Thank you'
 
-    expect(ActionMailer::base.deliveries).to have(1).email
+    expect(ActionMailer::Base.deliveries).to have(1).email
 
     expect(Passenger.find_by(last_name: 'Glasenapp').tickets.count).to eq(1)
     expect(van.tickets.count).to eq(1)
@@ -57,7 +62,7 @@ feature 'buying a ticket' do
 
     click_link 'Create Account'
 
-    expect(page).to have_link 'Sign up with Facebook'
+    #expect(page).to have_link 'Sign up with Facebook'
 
     fill_in 'First name', with: 'Shane'
     fill_in 'Last name', with: 'Wyenn'
@@ -99,7 +104,7 @@ feature 'buying a ticket' do
 
     expect(page).to have_text 'Please Log in or create an account before you buy a ticket'
 
-    expect(page).to have_link 'Log in with Facebook'
+    #expect(page).to have_link 'Log in with Facebook'
 
     fill_in 'Email', with: passenger.email
     fill_in 'Password', with: passenger.password

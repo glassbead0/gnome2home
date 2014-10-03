@@ -2,7 +2,7 @@
   <% if passenger_signed_in? %>
     <li><%= link_to current_passenger.email, edit_passenger_registration_path %></li>
     <li class="divider"></li>
-    <li><%= link_to 'Logout', destroy_passenger_session_path %></li>
+    <li><%= link_to 'Logout', destroy_passenger_session_path, method: :delete %></li>
   <% elsif admin_signed_in? %>
     <li><%= link_to 'Some admin stuff', root_path %></li>
     <li class="divider"></li>

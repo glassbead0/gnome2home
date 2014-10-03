@@ -33,7 +33,7 @@ class TicketsController < ApplicationController
     @ticket.qrcode = "http://localhost:3000/scan?confirmation=#{@ticket.id}"
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to @ticket, notice: 'Thank you for riding Gnome2Home. You will receive an email shortly with your QR code and confirmation number' }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new }

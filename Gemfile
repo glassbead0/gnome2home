@@ -14,6 +14,9 @@ gem 'factory_girl_rails'
 gem 'faker'
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'launchy'
+gem 'rspec-collection_matchers'
+
 
 
 group :development do
