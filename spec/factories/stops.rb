@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :stop do
-    location "MyString"
-    time "MyString"
+    location 'CSU'
+    time Time.now
   end
 end
