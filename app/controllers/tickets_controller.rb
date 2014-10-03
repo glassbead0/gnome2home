@@ -1,6 +1,8 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
+  before_action :authenticate_passenger!, only: [:new, :create, :show]
+  before_action :authenticate_admin!, only: [:edit, :index, :update, :destroy]
   # GET /tickets
   # GET /tickets.json
   def index
@@ -28,7 +30,7 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     @ticket = Ticket.new(ticket_params)
-
+    @ticket.qrcode = "http://localhost:3000/scan?confirmation=#{@ticket.id}"
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }

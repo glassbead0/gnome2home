@@ -13,6 +13,7 @@ gem 'devise'
 gem 'factory_girl_rails'
 gem 'faker'
 gem 'omniauth'
+gem 'omniauth-facebook'
 
 
 group :development do

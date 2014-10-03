@@ -5,7 +5,7 @@ feature 'buying a ticket' do
     van = FactoryGirl.create(:van)
 
     visit '/'
-    click_link 'Create account'
+    click_link 'Create Account'
 
     expect(page).to have_link 'Sign up with Facebook'
 
@@ -55,7 +55,7 @@ feature 'buying a ticket' do
 
     expect(page).to have_text 'Please Log in or create an account before you buy a ticket'
 
-    click_link 'Create account'
+    click_link 'Create Account'
 
     expect(page).to have_link 'Sign up with Facebook'
 
@@ -86,6 +86,7 @@ feature 'buying a ticket' do
     expect(Passenger.find_by(last_name: 'Glasenapp').tickets.count).to eq(1)
     expect(van.tickets.count).to eq(1)
     expect(van.seats_available).to eq(13)
+    expect(Ticket.first.qrcode).to eq('http://gnome2home.com/scan?confirmation=1')
   end
 
   scenario 'clicks buy ticket first, then logs in' do
