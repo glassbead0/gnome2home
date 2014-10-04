@@ -17,7 +17,7 @@ gem 'omniauth-facebook'
 gem 'launchy'
 gem 'rspec-collection_matchers'
 gem 'rqrcode'
-
+gem 'sendgrid'
 
 group :development do
   gem 'sqlite3'
