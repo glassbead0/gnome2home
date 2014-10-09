@@ -4,8 +4,8 @@ class VansController < ApplicationController
   # GET /vans
   # GET /vans.json
   def index
-    @vans_south = Van.where(direction: 'S')
-    @vans_north = Van.where(direction: 'N')
+    @vans_south = Van.where(direction: 'S').where('departure_time > ?', Time.now - 2.hours).order(:departure_time)
+    @vans_north = Van.where(direction: 'N').where('departure_time > ?', Time.now - 2.hours).order(:departure_time)
   end
 
   # GET /vans/1
