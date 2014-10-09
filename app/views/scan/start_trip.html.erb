@@ -1,15 +1,24 @@
-<div class="page-header">
+<div class="page-header container">
   <h1>Select Trip to Start</h1>
 </div>
 
+<%= form_tag(scan_ticket_path, method: :get) %>
 <div class="container">
   <div class="row">
-    <%= label_tag :van %>
-    <%= select_tag :van, options_for_select(@my_vans) %>
+    <%= label_tag :van, nil, class: 'control-label col-sm-2' do %>
+      Your Vans
+    <% end %>
+    <div class="col-sm-4">
+      <% if @just_added_van %>
+        <%= select_tag :van, options_for_select(@my_van_times, @just_added_van),  id: 'van_select', class: 'form_control' %>
+      <% else %>
+        <%= select_tag :van, options_for_select(@my_van_times),  id: 'van_select', class: 'form_control' %>
+      <% end %>
+    </div>
   </div>
+  <br/>
 
-  <div>
-    <%= label_tag :van2 %>
-    <%= select_tag :van, options_for_select(@other_vans), include_blank: true %>
+  <div class="row">
+    <%= submit_tag 'Start Checking In', class: 'btn btn-success col-sm-offset-2' %>
   </div>
 </div>

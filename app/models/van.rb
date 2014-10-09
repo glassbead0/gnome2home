@@ -4,6 +4,9 @@ class Van < ActiveRecord::Base
   has_many :passengers, through: :tickets
   belongs_to :admin # driver
 
+  validates :direction, inclusion: { in: %w(N S),
+            message: 'Direction must set to N or S' }
+
   def self.seed_data! #only necessary for testing. this is found in seeds.rb
 
     28.times do |y|

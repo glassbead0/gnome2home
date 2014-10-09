@@ -1,5 +1,5 @@
 class VansController < ApplicationController
-  before_action :set_van, only: [:show, :edit, :update, :destroy]
+  before_action :set_van, only: [:show, :edit, :update, :destroy, :claim]
 
   # GET /vans
   # GET /vans.json
@@ -26,7 +26,8 @@ class VansController < ApplicationController
   # POST /vans.json
   def create
     @van = Van.new(van_params)
-
+    create_stops_for(@van)
+    @van.departure_time_readable = @van.stops[0].location + ' on ' + @van.departure_time.strftime('%a: %b %e, %l:%M %P')
     respond_to do |format|
       if @van.save
         format.html { redirect_to @van, notice: 'Van was successfully created.' }
@@ -36,6 +37,29 @@ class VansController < ApplicationController
         format.json { render json: @van.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def create_stops_for(van)
+    if van.direction == 'S'
+      stop1 = Stop.create(location: 'CSU', time: van.departure_time, human_readable: 'CSU at ' + van.departure_time.strftime('%a: %b %e, %l:%M %P'))
+      stop2 = Stop.create(location: 'Harmony Rd', time: stop1.time + 10.minutes, human_readable: 'Harmony Rd at ' + (stop1.time + 10.minutes).strftime('%a: %b %e, %l:%M %P'))
+      stop3 = Stop.create(location: 'Thornton', time: stop2.time + 35.minutes, human_readable: 'Thornton at ' + (stop2.time + 35.minutes).strftime('%a: %b %e, %l:%M %P'))
+      stop4 = Stop.create(location: 'Union Station', time: stop3.time + 15.minutes, human_readable: 'Union Station at ' + (stop3.time + 15.minutes).strftime('%a: %b %e, %l:%M %P'))
+      van.stops << stop1 << stop2 << stop3 << stop4
+    elsif van.direction == 'N'
+      stop5 = Stop.create(location: 'Union Station', time: van.departure_time, human_readable: 'Union Station at ' + van.departure_time.strftime('%a: %b %e, %l:%M %P'))
+      stop6 = Stop.create(location: 'Thornton', time: stop5.time + 15.minutes, human_readable: 'Thornton at ' + (stop5.time + 15.minutes).strftime('%a: %b %e, %l:%M %P'))
+      stop7 = Stop.create(location: 'Harmony Rd', time: stop6.time + 35.minutes, human_readable: 'Harmony Rd at ' + (stop6.time + 35.minutes).strftime('%a: %b %e, %l:%M %P'))
+      stop8 = Stop.create(location: 'CSU', time: stop7.time + 10.minutes, human_readable: 'CSU at ' + (stop7.time + 10.minutes).strftime('%a: %b %e, %l:%M %P'))
+      van.stops << stop5 << stop6 << stop7 << stop8
+    end
+  end
+
+  def claim
+    authenticate_admin!
+    @van.admin = current_admin
+    current_admin.vans << @van
+    redirect_to "/scan/start_trip?van=#{@van.id}", notice: "#{current_admin.email} is now the driver of Van #{@van.id}"
   end
 
   # PATCH/PUT /vans/1

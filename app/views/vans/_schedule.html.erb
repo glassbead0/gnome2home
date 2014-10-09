@@ -35,6 +35,7 @@
       <% if admin_signed_in? %>
         <td><%= link_to 'Edit', edit_van_path(van) %></td>
         <td><%= link_to 'Destroy', van, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Claim Van', claim_van_path(van) %></td>
         <td><%= link_to 'Buy Ticket', "/tickets/new?van_id=#{van.id}" %></td>
     <% else %>
         <td><%= link_to 'Buy Ticket', "/tickets/new?van_id=#{van.id}", id: "ticket_for_van_#{van.id}" %></td>

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'scan/ticket'
-  get 'scan/start_trip'
+  root to: 'welcome#index'
 
   devise_for :admins
   devise_for :passengers
@@ -9,14 +7,18 @@ Rails.application.routes.draw do
   resources :tickets
   resources :vans
 
+  get 'vans/claim/:id' => 'vans#claim', as: 'claim_van'
   get 'contact' => 'contact#index'
   get 'map' => 'map#index'
 
+
+  get 'scan/ticket'
+  get 'scan/start_trip'
+  get 'scan/set_active_van'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
