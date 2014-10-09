@@ -46,7 +46,7 @@
   <br/>
 
   <div class="container">
-    <%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 6, :level => :h ) %>
+    <%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 7, :level => :h ) %>
 
     <table>
       <% @qr.modules.each_index do |x| %>

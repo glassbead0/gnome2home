@@ -27,7 +27,7 @@ have your confirmation number below handy</p>
 
 <p><strong>Confirmation Number:</strong> <%= @ticket.id %></p>
 
-<%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 6, :level => :h ) %>
+<%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 7, :level => :h ) %>
 
 <table>
   <% @qr.modules.each_index do |x| %>

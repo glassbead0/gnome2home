@@ -15,3 +15,7 @@
  *= require font-awesome
  *= require bootstrap
  */
+
+#flash-messages {
+  padding-top: 10px;
+}

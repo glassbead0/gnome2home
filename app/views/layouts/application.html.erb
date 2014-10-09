@@ -71,9 +71,9 @@
   </div>
   <!-- /.container -->
 </nav>
-<div class="container">
+<div class="container" <% if flash.count > 0 %> id="flash-messages" <% else %> id="" <% end %>>
   <% flash.each do |name, msg| %>
-    <%= content_tag :div, :class => "alert alert-#{ name == :error ? "danger" : "success" } alert-dismissable" do %>
+    <%= content_tag :div, :class => "alert alert-#{ name == 'alert' ? "danger" : "success" } alert-dismissable" do %>
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       <%= msg %>
     <% end %>

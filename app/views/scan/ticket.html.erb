@@ -4,7 +4,24 @@
   <h4>Departs from <%= @van.departure_time_readable %></h4>
 </div>
 
-
+<div class="row">
+  <div class="col-sm-4 col-sm-offset-1">
+    <h3>Passengers</h3>
+    <ul class="list-group">
+      <% @van.tickets.each do |t| %>
+        <% if t.scanned %>
+          <li class="list-group-item list-group-item-warning"><%= "#{t.first_name} #{t.last_name}, conf #: #{t.id}" %></li>
+        <% else %>
+          <li class="list-group-item list-group-item-success">
+            <%= link_to "/scan/ticket?ticket_id=#{t.id}" do %>
+              <%= "#{t.first_name} #{t.last_name}, conf #: #{t.id}" %>
+            <% end %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
 
 <!--FINISH THIS-->
