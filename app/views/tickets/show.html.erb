@@ -45,22 +45,18 @@
   <dt>QR Code:</dt>
   <br/>
 
-  <div class="container">
-    <%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 7, :level => :h ) %>
+ </dl>
 
-    <table>
-      <% @qr.modules.each_index do |x| %>
-        <tr>
-          <% @qr.modules.each_index do |y| %>
-            <% if @qr.dark?(x,y) %>
-              <td class="black"/>
-            <% else %>
-              <td class="white"/>
-            <% end %>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
+<%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 4, :level => :l ) %>
+<% @qr_png = @qr.to_img.resize(400, 400).to_data_url %>
+<% @qr_png_sm = @qr.to_img.resize(200, 200).to_data_url %>
+<div class="container">
+  <div class="row">
+    <%= image_tag @qr_png %>
   </div>
+  <div class="row">
+    <%= image_tag @qr_png_sm %>
+  </div>
+</div>
 
-</dl>
+

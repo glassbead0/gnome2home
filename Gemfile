@@ -17,6 +17,7 @@ gem 'omniauth-facebook'
 gem 'launchy'
 gem 'rspec-collection_matchers'
 gem 'rqrcode'
+gem 'rqrcode_png'
 gem 'sendgrid'
 
 group :development do
