@@ -19,6 +19,7 @@ gem 'rspec-collection_matchers'
 gem 'rqrcode'
 gem 'rqrcode_png'
 gem 'sendgrid'
+gem 'shoulda-matchers'
 
 group :development do
   gem 'sqlite3'

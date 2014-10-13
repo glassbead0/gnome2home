@@ -52,7 +52,8 @@ feature 'buying a ticket' do
 
     # fill van and buy another ticket
 
-    van.seats_available = 0;
+    van.seats_available = 0
+    van.save
 
     click_link 'Schedule'
 

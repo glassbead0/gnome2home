@@ -21,3 +21,6 @@
 
 en:
   hello: "Hello world"
+  recipt:
+    send_recipt:
+      subject: 'Gnome2Home recipt'
