@@ -4,6 +4,8 @@ class Van < ActiveRecord::Base
   has_many :passengers, through: :tickets
   belongs_to :admin # driver
 
+  scope :up_to_date, -> { where('departure_time > ?', Time.now - 12.hours) }
+
   validates :direction, inclusion: { in: %w(N S),
             message: 'Direction must set to N or S' }
 

@@ -48,8 +48,16 @@ feature 'buying a ticket' do
     expect(Passenger.find_by(last_name: 'Glasenapp').tickets.count).to eq(1)
     expect(van.tickets.count).to eq(1)
     expect(Ticket.first.van.seats_available).to eq(13)
-    expect(Ticket.first.qrcode).to eq('http://gnome2home.com/scan/ticket?confirmation=1')
+    expect(Ticket.first.qrcode).to eq('http://gnome2home.herokuapp.com/scan/ticket?ticket_id=1')
 
+    # fill van and buy another ticket
+
+    van.seats_available = 0;
+
+    click_link 'Schedule'
+
+    expect(page).to_not have_link 'ticket_for_van_1'
+    expect(page).to have_text 'Van is full'
 
   end
 
@@ -101,7 +109,7 @@ feature 'buying a ticket' do
     expect(shane.tickets.count).to eq(1)
     expect(van.tickets.count).to eq(1)
     expect(Ticket.first.van.seats_available).to eq(13)
-    expect(shane.tickets.first.qrcode).to eq('http://gnome2home.com/scan/ticket?confirmation=1')
+    expect(shane.tickets.first.qrcode).to eq('http://gnome2home.herokuapp.com/scan/ticket?ticket_id=1')
   end
 
   scenario 'clicks buy ticket first, then logs in' do
@@ -145,8 +153,7 @@ feature 'buying a ticket' do
     expect(passenger.tickets.count).to eq(1)
     expect(van.tickets.count).to eq(1)
     expect(passenger.vans.first.seats_available).to eq(13)
-    expect(passenger.tickets.first.qrcode).to eq('http://gnome2home.com/scan/ticket?confirmation=2')
-
+    expect(passenger.tickets.first.qrcode).to eq('http://gnome2home.herokuapp.com/scan/ticket?ticket_id=2')
   end
 
 end

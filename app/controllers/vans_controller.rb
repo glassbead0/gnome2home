@@ -1,11 +1,11 @@
 class VansController < ApplicationController
   before_action :set_van, only: [:show, :edit, :update, :destroy, :claim]
-
+  before_action :authenticate_admin!, only: [:show, :edit, :new, :create, :claim, :update, :destroy]
   # GET /vans
   # GET /vans.json
   def index
-    @vans_south = Van.where(direction: 'S').where('departure_time > ?', Time.now - 2.hours).order(:departure_time)
-    @vans_north = Van.where(direction: 'N').where('departure_time > ?', Time.now - 2.hours).order(:departure_time)
+    @vans_south = Van.up_to_date.where(direction: 'S').order(:departure_time)
+    @vans_north = Van.up_to_date.where(direction: 'N').order(:departure_time)
   end
 
   # GET /vans/1
@@ -58,6 +58,8 @@ class VansController < ApplicationController
   def claim
     authenticate_admin!
     @van.admin = current_admin
+    @van.driver = current_admin.first_name
+    @van.save
     current_admin.vans << @van
     redirect_to "/scan/start_trip?van=#{@van.id}", notice: "#{current_admin.email} is now the driver of Van #{@van.id}"
   end
@@ -94,6 +96,6 @@ class VansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def van_params
-      params.require(:van).permit(:driver, :direction, :seats_available, :seats_occupied)
+      params.require(:van).permit(:driver, :direction, :seats_available, :seats_occupied, :departure_time)
     end
 end

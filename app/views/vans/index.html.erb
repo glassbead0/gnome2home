@@ -1,7 +1,9 @@
 <div class="page-header container">
-  <%= link_to new_van_path, :class => 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New Van
+  <% if admin_signed_in? %>
+    <%= link_to new_van_path, :class => 'btn btn-primary' do %>
+      <span class="glyphicon glyphicon-plus"></span>
+      New Van
+    <% end %>
   <% end %>
   <h1>Find Your Ride</h1>
 </div>

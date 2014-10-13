@@ -2,14 +2,14 @@
 
 <p>Please keep this email. When you get on the van,
 either pull up this email with the below QR code, or
-have your confirmation number below handy</p>
+have your confirmation number below handy.</p>
 
 <p><strong>Confirmation Number:</strong> <%= @ticket.id %></p>
 
 
 <%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 4, :level => :l ) %>
 <% @qr_png = @qr.to_img.resize(400, 400).to_data_url %>
-<% @qr_png_sm = @qr.to_img.resize(200, 200).to_data_url %>
+<% @qr_png_sm = @qr.to_img.resize(300, 300).to_data_url %>
 <div class="container">
   <div class="row">
     <%= image_tag @qr_png %>
@@ -18,4 +18,7 @@ have your confirmation number below handy</p>
     <%= image_tag @qr_png_sm %>
   </div>
 </div>
+<br/>
+<p>*Yes, there are 2 qr codes of different sizes. This is
+to accomodate for different size screens.</p>
 
