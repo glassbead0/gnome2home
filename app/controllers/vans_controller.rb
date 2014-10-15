@@ -25,7 +25,11 @@ class VansController < ApplicationController
   # POST /vans
   # POST /vans.json
   def create
+
     @van = Van.new(van_params)
+    departure_time = params[:van][:departure_time]
+    set_departure_time_of(@van, departure_time)
+
     create_stops_for(@van)
     @van.departure_time_readable = @van.stops[0].location + ' on ' + @van.departure_time.strftime('%a: %b %e, %l:%M %P')
     respond_to do |format|
@@ -56,6 +60,25 @@ class VansController < ApplicationController
     end
   end
 
+  def set_departure_time_of(van, time)
+    year = time[6..9].to_i
+    month = time[0..1].to_i
+    day = time[3..4].to_i
+    if time[12] == ':'
+      add_12 = (time[16..17] == 'AM') ? 0 : 12
+      hour = time[11].to_i + add_12
+      minute = time[13..14].to_i
+    else
+      add_12 = (time[17..18] == 'AM') ? 0 : 12
+      hour = time[11.12].to_i + add_12
+      minute = time[14..15].to_i
+    end
+
+    datetime = Time.local(year, month, day, hour, minute)
+    van.departure_time = datetime
+    van.save
+  end
+
   def claim
     authenticate_admin!
     @van.admin = current_admin
@@ -70,9 +93,11 @@ class VansController < ApplicationController
   def update
     respond_to do |format|
       if @van.update(van_params)
+        departure_time = params[:van][:departure_time]
+        set_departure_time_of(@van, departure_time)
         create_stops_for(@van)
         @van.save
-        format.html { redirect_to vans_path, notice: 'Van was successfully updated.' }
+        format.html { redirect_to @van, notice: 'Van was successfully updated.' }
         format.json { render :show, status: :ok, location: @van }
       else
         format.html { render :edit }
@@ -99,6 +124,6 @@ class VansController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def van_params
-      params.require(:van).permit(:driver, :direction, :seats_available, :seats_occupied, :departure_time)
+      params.require(:van).permit(:driver, :direction, :seats_available, :seats_occupied)
     end
 end

@@ -4,10 +4,12 @@ class Van < ActiveRecord::Base
   has_many :passengers, through: :tickets
   belongs_to :admin # driver
 
-  scope :up_to_date, -> { where('departure_time > ?', Time.now - 12.hours) }
+  scope :up_to_date, -> { where('departure_time > ?', Time.zone.now - 3.hours) }
 
   validates :direction, inclusion: { in: %w(N S),
             message: 'Direction must set to N or S' }
+
+  validates :direction, :driver, :departure_time, presence: true
 
   def self.seed_data! #only necessary for testing. this is found in seeds.rb
 
