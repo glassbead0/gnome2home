@@ -1,16 +1,41 @@
-<h2>Change your password</h2>
+<div class="col-sm-6">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<div class="page-header container">
+  <div class="col-sm-offset-2">
+    <h2>Change your password</h2>
+  </div>
+</div>
 
-  <div><%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %></div>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), class: 'form-horizontal', html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
+    <div class="form-group row">
+      <%= f.label :password, class: 'control-label col-sm-2 col-sm-offset-2' %>
+      <div class="col-sm-8">
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
+      </div>
+    </div>
 
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
+    <div class="form-group row">
+      <%= f.label :password_confirmation, class: 'control-label col-sm-2 col-sm-offset-2' %>
+      <div class="col-sm-8">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+      </div>
+    </div>
 
-<%= render "admins/shared/links" %>
+    <div class="form-group">
+      <%= f.submit "Change Password", class: 'btn btn-success btn-lg col-sm-offset-4' %>
+    </div>
+
+
+  <% end %>
+  <div class="col-sm-offset-4">
+    <%= render "admins/shared/links" %>
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <%= inline_svg('gnome_xl.svg') %>
+</div>
+

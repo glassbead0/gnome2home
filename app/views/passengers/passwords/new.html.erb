@@ -1,12 +1,28 @@
-<h2>Forgot your password?</h2>
+<div class="page-header container">
+  <h2 align="center">Seriously... You forgot your password?</h2>
+  <h4 align="center">Suggestion: Try <a href="https://agilebits.com/onepassword" target="_blank">1Password</a></h4>
+  <hr/>
+  <h5 align="center"><%= image_tag('gnome.png', size: '30x30') %> Ok, just this one time, we'll have a little gnome help you out <%= image_tag('gnome.png', size: '30x30') %></h5>
+</div>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div class="container">
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), class: 'form-horizontal', html: { method: :post }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+    <div class="form-group row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: 'enter your email address' %>
+      </div>
+    </div>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+    <div class="form-group">
+      <%= f.button class: 'btn btn-success btn-lg col-sm-offset-4' do %>
+        <span class="glyphicon glyphicon-send"></span>&nbsp Send Reset Instructions
+        <% end %>
+    </div>
+  <% end %>
 
-<%= render "passengers/shared/links" %>
+  <div class="col-sm-offset-4">
+  <%= render "passengers/shared/links" %>
+  </div>
+</div>
