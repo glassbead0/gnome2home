@@ -18,8 +18,7 @@ class TicketsController < ApplicationController
   def new
     @ticket = Ticket.new
 
-    van = Van.find(params[:van_id])
-    @ticket_time = van.stops[0].location + ' on ' + van.departure_time.strftime('%a: %b %e, %l:%M %P')
+    @van = Van.find(params[:van_id])
   end
 
   # GET /tickets/1/edit

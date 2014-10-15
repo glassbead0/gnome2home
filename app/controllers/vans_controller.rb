@@ -40,6 +40,7 @@ class VansController < ApplicationController
   end
 
   def create_stops_for(van)
+    van.stops.delete_all
     if van.direction == 'S'
       stop1 = Stop.create(location: 'CSU', time: van.departure_time, human_readable: 'CSU at ' + van.departure_time.strftime('%a: %b %e, %l:%M %P'))
       stop2 = Stop.create(location: 'Harmony Rd', time: stop1.time + 10.minutes, human_readable: 'Harmony Rd at ' + (stop1.time + 10.minutes).strftime('%a: %b %e, %l:%M %P'))
@@ -69,7 +70,9 @@ class VansController < ApplicationController
   def update
     respond_to do |format|
       if @van.update(van_params)
-        format.html { redirect_to @van, notice: 'Van was successfully updated.' }
+        create_stops_for(@van)
+        @van.save
+        format.html { redirect_to vans_path, notice: 'Van was successfully updated.' }
         format.json { render :show, status: :ok, location: @van }
       else
         format.html { render :edit }

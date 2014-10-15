@@ -1,3 +1,9 @@
+<script type="text/javascript">
+  $(function () {
+    $('#datetimepicker1').datetimepicker();
+  });
+</script>
+
 <%= form_for(@van, :html => { :class => "form-horizontal" }) do |f| %>
   <% if @van.errors.any? %>
     <div class="alert alert-danger alert-dismissable">
@@ -15,7 +21,7 @@
   <div class="form-group">
     <%= f.label :driver, :class => "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.text_field :driver, :class => "form-control" %>
+      <%= f.text_field :driver, :class => "form-control", value: current_admin.first_name %>
     </div>
   </div>
   <div class="form-group">
@@ -27,24 +33,35 @@
   <div class="form-group">
     <%= f.label :departure_time, :class => "col-sm-2 control-label" %>
     <div class="col-sm-4">
-      <%= f.datetime_select :departure_time, ampm: true, :class => "form-control" %>
+      <div class='input-group date' id='datetimepicker1'>
+        <%= f.datetime_field :departure_time, type: 'text', class: 'form-control' %>
+           <span class="input-group-addon">
+             <span class="glyphicon glyphicon-calendar">
+             </span>
+           </span>
+      </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
   <div class="form-group">
     <%= f.label :seats_available, :class => "col-sm-2 control-label" %>
     <div class="col-sm-2">
       <%= f.number_field :seats_available, :class => "form-control" %>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :seats_occupied, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-2">
-      <%= f.text_field :seats_occupied, :class => "form-control" %>
-    </div>
-  </div>
+
+
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <%= f.submit :class => "btn btn-primary" %>
     </div>
   </div>
 <% end %>
+
