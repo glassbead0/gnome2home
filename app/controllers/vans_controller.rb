@@ -28,7 +28,7 @@ class VansController < ApplicationController
 
     @van = Van.new(van_params)
     departure_time = params[:van][:departure_time]
-    set_departure_time_of(@van, departure_time)
+    set_departure_time(@van, departure_time)
 
     create_stops_for(@van)
     @van.departure_time_readable = @van.stops[0].location + ' on ' + @van.departure_time.strftime('%a: %b %e, %l:%M %P')
@@ -60,7 +60,7 @@ class VansController < ApplicationController
     end
   end
 
-  def set_departure_time_of(van, time)
+  def set_departure_time(van, time)
     year = time[6..9].to_i
     month = time[0..1].to_i
     day = time[3..4].to_i
@@ -74,7 +74,7 @@ class VansController < ApplicationController
       minute = time[14..15].to_i
     end
 
-    datetime = Time.local(year, month, day, hour, minute)
+    datetime = Time.zone.local(year, month, day, hour, minute)
     van.departure_time = datetime
     van.save
   end
@@ -94,7 +94,7 @@ class VansController < ApplicationController
     respond_to do |format|
       if @van.update(van_params)
         departure_time = params[:van][:departure_time]
-        set_departure_time_of(@van, departure_time)
+        set_departure_time(@van, departure_time)
         create_stops_for(@van)
         @van.save
         format.html { redirect_to @van, notice: 'Van was successfully updated.' }
