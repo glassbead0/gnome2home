@@ -5,4 +5,6 @@ class Admin < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :vans
+
+  validates :first_name, :last_name, :phone, :email, presence: true
 end

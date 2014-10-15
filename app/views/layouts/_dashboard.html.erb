@@ -6,10 +6,12 @@
   <% elsif admin_signed_in? %>
     <li><%= link_to 'Start Trip', '/scan/start_trip' %></li>
     <li class="divider"></li>
+    <li><%= link_to 'My Account', edit_admin_registration_path %></li>
     <li><%= link_to 'Logout', destroy_admin_session_path, method: :delete %></li>
 
 <% else %>
-    <li><%= link_to 'Log in', new_passenger_session_path %></li>
+    <li><%= link_to 'Passenger Log in', new_passenger_session_path %></li>
+    <li><%= link_to 'Driver Log it', new_admin_session_path %></li>
     <li><%= link_to 'Create Account', new_passenger_registration_path %></li>
   <% end %>
 
