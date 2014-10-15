@@ -28,27 +28,36 @@
     </div>
 
     <div class="from-group row">
-      <%= f.label :password, class: 'control-label col-sm-2' %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %><br />
+      <%= f.label :password, class: 'control-label col-sm-2' %>
       <div class="col-sm-4">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '8 character minimum'  %>
       </div>
     </div>
     <br/>
 
-    <div class="form-group">
+    <div class="form-group row">
       <%= f.label :password_confirmation, class: 'control-label col-sm-2' %>
       <div class="col-sm-4">
         <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
       </div>
     </div>
 
-
     <div class="form-group row">
+      <%= label_tag :pin, nil, class: 'control-label col-sm-2' %>
+      <div class="col-sm-4">
+        <%= password_field_tag :pin, nil, autocomplete: "off", class: 'form-control', placeholder: 'Gnome2Home Pin' %>
+      </div>
+    </div>
+
+
+    <div class="form-group">
       <div class="col-sm-offset-2">
       <%= f.submit "Create Admin account", class: 'btn btn-success btn-lg' %>
       </div>
     </div>
+
   <% end %>
+
 
   <div class="col-sm-offset-2">
     <%= render "admins/shared/links" %>
