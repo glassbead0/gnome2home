@@ -1,5 +1,5 @@
 class Feedback < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "gnome2home_contact_form@example.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -12,7 +12,6 @@ class Feedback < ActionMailer::Base
     @email = email
     @message = message
 
-    mail from: @email
     mail to: "glassbead@gmail.com"
   end
 end
