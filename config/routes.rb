@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'scan/ticket'
   get 'scan/start_trip'
   get 'scan/set_active_van'
+
+  post 'contact' => 'contact#send_feedback'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
