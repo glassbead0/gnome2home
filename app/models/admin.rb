@@ -6,5 +6,5 @@ class Admin < ActiveRecord::Base
 
   has_many :vans
 
-  validates :first_name, :last_name, :phone, :email, presence: true
+  validates_presence_of :first_name, :last_name, :phone
 end
