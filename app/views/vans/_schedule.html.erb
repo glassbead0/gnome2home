@@ -6,6 +6,7 @@
       <th>Van #</th>
       <% if admin_signed_in? %>
         <th>Driver</th>
+
       <% end %>
       <th>Seats Left</th>
       <% if vans[0].direction == 'S' %>
@@ -19,7 +20,11 @@
         <th>Harmony Rd</th>
         <th>CSU</th>
       <% end %>
-
+        <th></th>
+      <% if admin_signed_in? %>
+        <th></th>
+        <th></th>
+      <% end %>
     </tr>
     </thead>
 

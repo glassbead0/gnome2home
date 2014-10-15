@@ -1,7 +1,7 @@
 class Recipt < ActionMailer::Base
   include SendGrid
 
-  default from: "glassbead@gmail.com"
+  default from: "no-reply@gnome2home.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
