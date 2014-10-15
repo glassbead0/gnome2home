@@ -6,6 +6,6 @@ feature 'scheduling' do
   end
 
   scenario 'admin can edit individual stop times' do
-    
+
   end
 end

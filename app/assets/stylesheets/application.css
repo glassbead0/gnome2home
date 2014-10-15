@@ -16,6 +16,20 @@
  *= require bootstrap
  */
 
+body {
+  background-image: url('subtle_white_feathers.png');
+  /*background-repeat: no-repeat;*/
+  background-attachment: fixed;
+}
 #flash-messages {
   padding-top: 10px;
+}
+
+.contact-footer {
+  background-color: #444;
+  opacity: 0.6;
+}
+
+.home-image {
+  border-radius: 10px;
 }
