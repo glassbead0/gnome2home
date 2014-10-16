@@ -1,77 +1,126 @@
 <div class="page-header container">
-  <h2>Edit <%= resource_name.to_s.humanize %> Account</h2>
+  <h2>Account Details</h2>
 </div>
 
+
+<!-- Nav tabs -->
 <div class="container">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="active"><a href="#my_tickets" role="tab" data-toggle="tab">My Tickets</a></li>
+    <li><a href="#account" role="tab" data-toggle="tab">Account</a></li>
+  </ul>
+</div>
+<br/>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'form-horizontal',  html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
+<div class="tab-content container">
+  <div class="tab-pane active" id="my_tickets">
+    <!--My Tickets-->
 
-    <div class="form-group row">
-      <%= f.label :first_name, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
-      </div>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered table-hover">
+        <thead>
+        <tr>
+          <th>Name on Ticket</th>
+          <th>email</th>
+          <th>Confirmation #</th>
+          <th>Departure Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+
+          <tbody>
+          <% @tickets.each do |ticket| %>
+          <tr>
+            <td><%= "#{ticket.first_name} #{ticket.last_name}" %></td>
+            <td><%= ticket.email %></td>
+            <td><%= ticket.id %></td>
+            <td><%= ticket.van.departure_time_readable %></td>
+            <td><%= link_to 'Show Details', ticket, class: 'btn btn-info btn-xs' %></td>
+            <td><%= link_to 'Cancel Ticket', ticket, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you sure you want to cancel your ticket?'} %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-    <div class="form-group row">
-      <%= f.label :last_name, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.text_field :last_name, class: 'form-control' %>
-      </div>
+  <div class="tab-pane" id="account">
+    <!--edit accout info-->
+    <div class="container">
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: 'form-horizontal',  html: { method: :put }) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group row">
+          <%= f.label :first_name, class: 'control-label col-sm-2' %>
+          <div class="col-sm-4">
+            <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :last_name, class: 'control-label col-sm-2' %>
+          <div class="col-sm-4">
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :email, class: 'control-label col-sm-2' %>
+          <div class="col-sm-4">
+            <%= f.email_field :email, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= f.label :phone, class: 'control-label col-sm-2' %>
+          <div class="col-sm-4">
+            <%= f.text_field :phone, class: 'form-control' %>
+          </div>
+        </div>
+
+        <div class="from-group row">
+          <%= f.label :password, class: 'control-label col-sm-2' do %>New Password<% end %>
+          <div class="col-sm-4">
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '8 character minimum' %>
+          </div>
+        </div>
+        <br/>
+
+        <div class="form-group row">
+          <%= f.label :password_confirmation, class: 'control-label col-sm-2' do %>New Password Confirmation<% end %>
+          <div class="col-sm-4">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
+          </div>
+        </div>
+
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+        <% end %>
+
+        <div class="form-group row">
+          <%= f.label :current_password, class: 'control-label col-sm-2'%>
+          <div class="col-sm-4">
+            <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'we need your current password to make changes' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2">
+            <%= f.submit "Update Account", class: 'btn btn-success btn-lg' %>
+          </div>
+        </div>
+
+      <% end %>
+
+
+      <%= button_to "Cancel my account", registration_path(resource_name), class: 'btn btn-danger col-sm-offset-2', data: { confirm: "Are you sure?" }, method: :delete %>
+      <br/>
+      <%= link_to "Back", :back, class: 'btn btn-primary col-sm-offset-2' %>
+
     </div>
-
-    <div class="form-group row">
-      <%= f.label :email, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.email_field :email, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <%= f.label :phone, class: 'control-label col-sm-2' %>
-      <div class="col-sm-4">
-        <%= f.text_field :phone, class: 'form-control' %>
-      </div>
-    </div>
-
-    <div class="from-group row">
-      <%= f.label :password, class: 'control-label col-sm-2' do %>New Password<% end %>
-      <div class="col-sm-4">
-        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: '8 character minimum' %>
-      </div>
-    </div>
-    <br/>
-
-    <div class="form-group row">
-      <%= f.label :password_confirmation, class: 'control-label col-sm-2' do %>New Password Confirmation<% end %>
-      <div class="col-sm-4">
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-      </div>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="form-group row">
-      <%= f.label :current_password, class: 'control-label col-sm-2'%>
-      <div class="col-sm-4">
-        <%= f.password_field :current_password, autocomplete: "off", class: 'form-control', placeholder: 'we need your current password to make changes' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="col-sm-offset-2">
-        <%= f.submit "Update Account", class: 'btn btn-success btn-lg' %>
-      </div>
-    </div>
-
-  <% end %>
-
-
-  <%= button_to "Cancel my account", registration_path(resource_name), class: 'btn btn-danger col-sm-offset-2', data: { confirm: "Are you sure?" }, method: :delete %>
-  <br/>
-  <%= link_to "Back", :back, class: 'btn btn-primary col-sm-offset-2' %>
+  </div>
 
 </div>
+

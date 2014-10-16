@@ -18,24 +18,16 @@ feature 'can see my purchased tickets' do
 
     click_link passenger.email
 
-    click_button 'My Tickets'
+    click_link 'My Tickets'
 
-    old_ticket_name = ticket.first_name
     expect(page).to have_text ticket.first_name
     expect(page).to have_text ticket.last_name
     expect(page).to have_text ticket.email
-    expect(page).to have_text 'Confirmation Number'
+    expect(page).to have_text 'Confirmation #'
     expect(page).to have_text ticket.id
-    expect(page).to have_text van.departure_time
-    click_button 'Edit'
-    fill_in 'First name', with: passenger.first_name
-    click_button 'Update Ticket'
+    expect(page).to have_text van.departure_time_readable
 
-    expect(page).to have_text 'Ticket was successfully updated'
-    click_button 'My Tickets'
-    expect(page).to have_text passenger.first_name
-    expect(page).to_not have_text old_ticket_name
-    expect(click_button 'Delete').to change(van.seats_available).by(1)
+    # expect(click_link 'Cancel Ticket').to change { van.seats_available }.by(1)
 
   end
 end

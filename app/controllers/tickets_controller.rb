@@ -2,7 +2,7 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_passenger!, only: [:new, :create, :show]
-  before_action :authenticate_admin!, only: [:edit, :index, :update, :destroy]
+  before_action :authenticate_admin!, only: [:edit, :index, :update]
   # GET /tickets
   # GET /tickets.json
   def index
@@ -62,9 +62,12 @@ class TicketsController < ApplicationController
   # DELETE /tickets/1
   # DELETE /tickets/1.json
   def destroy
+    van = @ticket.van
+    van.seats_available += 1
+    van.save
     @ticket.destroy
     respond_to do |format|
-      format.html { redirect_to tickets_url, notice: 'Ticket was successfully destroyed.' }
+      format.html { redirect_to edit_passenger_registration_path, alert: 'Ticket was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

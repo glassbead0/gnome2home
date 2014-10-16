@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root to: 'welcome#index'
 
-  devise_for :admins
-  devise_for :passengers
+  devise_for :admins, controllers: { registrations: 'admins/registrations' }
+  devise_for :passengers, controllers: { registrations: 'passengers/registrations' }
 
   resources :tickets
   resources :vans
