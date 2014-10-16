@@ -8,7 +8,7 @@ RSpec.describe Recipt, :type => :mailer do
     it "renders the headers" do
       expect(mail.subject).to eq("Gnome2Home recipt")
       expect(mail.to).to eq([ticket.email])
-      expect(mail.from).to eq(["glassbead@gmail.com"])
+      expect(mail.from).to eq(["no-reply@gnome2home.com"])
     end
 
     it "renders the body" do

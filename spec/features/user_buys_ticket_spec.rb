@@ -4,6 +4,7 @@ feature 'buying a ticket' do
   scenario 'logs in first' do
     Van.seed_data!
     van = Van.first
+    ActionMailer::Base.deliveries.clear
 
     visit '/'
     click_link 'Create Account'
