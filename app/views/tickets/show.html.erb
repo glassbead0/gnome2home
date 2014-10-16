@@ -1,32 +1,66 @@
-<div class="page-header">
+<div class="page-header container">
   <%= link_to vans_path, :class => 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-th-list"></span>
     Back to Schedule
   <% end %>
   <h1>Ticket Details</h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Name</dt>
-  <dd><%= "#{@ticket.first_name} #{@ticket.last_name}" %></dd>
-
-  <dt>Departs at: </dt>
-  <dd><%= @ticket.van.stops[0].location + ' on ' + @ticket.van.departure_time.strftime('%a: %b %e, %l:%M %P') %></dd>
-
-  <dt>Confirmation Number:</dt>
-  <dd><%= @ticket.id %></dd>
-
-  <dt>QR Code:</dt>
-  <br/>
-
- </dl>
-
-<%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 4, :level => :l ) %>
-<% @qr_png = @qr.to_img.resize(400, 400).to_data_url %>
 <div class="container">
   <div class="row">
-    <%= image_tag @qr_png %>
+    <div class="col-sm-5">
+      <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd><%= "#{@ticket.first_name} #{@ticket.last_name}" %></dd>
+
+        <dt>Departs at: </dt>
+        <dd><%= @ticket.van.stops[0].location + ' on ' + @ticket.van.departure_time.strftime('%a: %b %e, %l:%M %P') %></dd>
+
+        <dt>Confirmation Number:</dt>
+        <dd><%= @ticket.id %></dd>
+
+        <dt>QR Code:</dt>
+        <br/>
+
+       </dl>
+    </div>
+
+
+        <div class="table-responsive col-sm-7">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+              <% if @ticket.van.direction == 'S' %>
+                <th>CSU</th>
+                <th>Harmony Rd</th>
+                <th>Thornton</th>
+                <th>Union Station</th>
+              <% else %>
+                <th>Union Station</th>
+                <th>Thornton</th>
+                <th>Harmony Rd</th>
+                <th>CSU</th>
+              <% end %>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @ticket.van.stops.each do |stop| %>
+              <td>
+                <%= stop.time.strftime('%l:%M %P') %>
+              </td>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+
+
+  </div>
+  <%  @qr = RQRCode::QRCode.new( @ticket.qrcode, :size => 4, :level => :l ) %>
+  <% @qr_png = @qr.to_img.resize(400, 400).to_data_url %>
+  <div class="container">
+    <div class="row">
+      <%= image_tag @qr_png %>
+    </div>
   </div>
 </div>
-
 

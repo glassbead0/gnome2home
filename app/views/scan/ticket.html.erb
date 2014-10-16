@@ -1,16 +1,46 @@
 <div class="page-header container">
-  <h1>Check riders in</h1>
-  <h4>Van # <%= @van.id %></h4>
-  <h4>Departs from <%= @van.departure_time_readable %></h4>
-</div>
+  <div class="row col-sm-4">
+    <h1>Check riders in </i></h1>
+    <h4>Van # <%= @van.id %></h4>
+  </div>
 
+  <div class="table-responsive col-sm-6 col-sm-offset-1">
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+      <tr>
+        <% if @van.direction == 'S' %>
+          <th>CSU</th>
+          <th>Harmony Rd</th>
+          <th>Thornton</th>
+          <th>Union Station</th>
+        <% else %>
+          <th>Union Station</th>
+          <th>Thornton</th>
+          <th>Harmony Rd</th>
+          <th>CSU</th>
+        <% end %>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @van.stops.each do |stop| %>
+        <td>
+          <%= stop.time.strftime('%l:%M %P') %>
+        </td>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div align="center">
+</div>
 <div class="row">
   <div class="col-sm-4 col-sm-offset-1">
-    <h3>Passengers</h3>
+    <h3>Passengers:</h3>
     <ul class="list-group">
       <% @van.tickets.each do |t| %>
         <% if t.scanned %>
-          <li class="list-group-item list-group-item-warning"><%= "#{t.first_name} #{t.last_name}, conf #: #{t.id}" %></li>
+          <li class="list-group-item list-group-item-warning"><%= inline_svg('gnome_xs.svg') %><%= "#{t.first_name} #{t.last_name}, conf #: #{t.id}" %></li>
         <% else %>
           <li class="list-group-item list-group-item-success">
             <%= link_to "/scan/ticket?ticket_id=#{t.id}" do %>
@@ -20,6 +50,9 @@
         <% end %>
       <% end %>
     </ul>
+  </div>
+  <div class="col-sm-4">
+    <span class="glyphicon glyphicon-qrcode" style="font-size: 8em"></span>
   </div>
 </div>
 
