@@ -23,6 +23,7 @@
           <th>Name on Ticket</th>
           <th>email</th>
           <th>Confirmation #</th>
+          <th>Van #</th>
           <th>Departure Time</th>
           <th></th>
           <th></th>
@@ -35,6 +36,7 @@
             <td><%= "#{ticket.first_name} #{ticket.last_name}" %></td>
             <td><%= ticket.email %></td>
             <td><%= ticket.id %></td>
+            <td><%= ticket.van.id %></td>
             <td><%= ticket.van.departure_time_readable %></td>
             <td><%= link_to 'Show Details', ticket, class: 'btn btn-info btn-xs' %></td>
             <% if ticket.scanned %>
