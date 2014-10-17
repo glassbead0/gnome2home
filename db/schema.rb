@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20141017192336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "provider"
-    t.integer  "uid"
+    t.string   "uid"
     t.string   "image"
   end
 
