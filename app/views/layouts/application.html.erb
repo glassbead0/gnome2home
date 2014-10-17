@@ -64,7 +64,13 @@
           <a href="/contact">Contact</a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <% if passenger_signed_in? && current_passenger.image %>
+              <%= image_tag current_passenger.image, size: '30x30' %>
+            <% else %>
+              Account <span class="caret"></span>
+            <% end %>
+          </a>
           <%= render 'layouts/dashboard' %>
         </li>
 
