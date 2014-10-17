@@ -20,14 +20,11 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-
     <div class="btn-group">
       <%= link_to omniauth_authorize_path(resource_name, provider), class: 'btn btn-primary' do %>
         <i class="fa fa-facebook fa-2x"></i> &nbsp&nbsp
         <span style="font-size: large">Sign in with <%= provider.to_s.titleize  %></span>
-
-    <% end %>
-
+      <% end %>
     </div>
   <% end -%>
 <% end -%>

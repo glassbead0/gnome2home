@@ -55,9 +55,11 @@
         </div>
         <div class="panel-body">
           <p>We fill in the missing segment of Front Range transportation: Introducing the Ft. Collins - Denver Direct!</p>
-          <%= link_to vans_path, class: 'btn btn-success btn-lg' do %>
-            <i class="fa fa-calendar"></i> View Schedule
-          <% end %>
+          <div align="center">
+            <%= link_to vans_path, class: 'btn btn-success btn-lg' do %>
+              <i class="fa fa-calendar"></i> View Schedule
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
@@ -68,9 +70,11 @@
         </div>
         <div class="panel-body">
           <p>Click Below for a map of the stops we make in Ft. Collins and in Denver</p>
-          <a href="/map" class="btn btn-success btn-lg">
-            <i class="fa fa-fw fa-compass"></i> Map
-          </a>
+          <div align="center">
+            <a href="/map" class="btn btn-success btn-lg">
+              <i class="fa fa-fw fa-compass"></i> Map
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -82,9 +86,20 @@
         <div class="panel-body">
           <p>1. Create an account (you can use Facebook) <br/>
           2. Buy a ticket <br/>3. Ride!</p>
-          <a href="/passengers/sign_up" class="btn btn-success btn-lg">
-            <i class="fa fa-user"></i> Sign up
-          </a>
+          <div align="center">
+            <a href="/passengers/sign_up" class="btn btn-success btn-lg">
+              <i class="fa fa-user"></i> Sign up
+            </a>
+          </div>
+          <div align="center">-or-</div>
+          <div align="center">
+            <div class="btn-group">
+              <%= link_to passenger_omniauth_authorize_path(:facebook), class: 'btn btn-primary btn-sm' do %>
+                <i class="fa fa-facebook fa-2x"></i> &nbsp&nbsp
+                <span style="font-size: large">Sign in with Facebook</span>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
