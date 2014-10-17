@@ -22,6 +22,13 @@ feature 'buy multiple tickets' do
 
     click_link 'ticket_for_van_1'
 
+    select '3', from: 'number_of_tickets'
+    click_button 'Buy Ticket'
+
+    expect(page).to have_text 'Thanks for buying 3 tickets'
+    expect(ActionMailer::Base.deliveries).to have(3).emails
+    # expect(van.seats_available).to eq(11)
+
     # finish this test!
 
   end

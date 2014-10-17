@@ -1,3 +1,24 @@
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      //test version (app.domain.com:3000)
+      appId      : '543717122428286',
+      //live version (gnome2home.herokuapp.com
+//      appID      :  '543709552429043',
+      xfbml      : true,
+      version    : 'v2.1'
+    });
+  };
+
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div class="page-header container">
   <h2>Sign up</h2>
 </div>

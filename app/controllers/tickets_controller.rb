@@ -19,6 +19,10 @@ class TicketsController < ApplicationController
     @ticket = Ticket.new
 
     @van = Van.find(params[:van_id])
+
+    if @van.seats_available < 1
+      redirect_to vans_path, alert: 'Sorry, that van is full.'
+    end
   end
 
   # GET /tickets/1/edit
@@ -29,6 +33,9 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     n = params[:number_of_tickets].to_i
+
+    # make sure there are enough tickets
+
     @ticket = Ticket.new(ticket_params)
 
     respond_to do |format|
@@ -52,7 +59,7 @@ class TicketsController < ApplicationController
           format.html { redirect_to @ticket, notice: 'Thank you for riding Gnome2Home. You will receive an email shortly with your QR code and confirmation number' }
           format.json { render :show, status: :created, location: @ticket }
         else
-          format.html { redirect_to edit_passenger_registration_path, notice: "Thanks for buying #{n} tickets. You can view all of you purchased tickets below. You will receive #{n} separate emails, each with a unique QR code ticket. Please"}
+          format.html { redirect_to edit_passenger_registration_path, notice: "Thanks for buying #{n} tickets. You can view all of you purchased tickets below. You will receive #{n} separate emails, each with a unique QR code ticket. Please keep those emails to check in. "}
           format.json { render :show, status: :created, location: @ticket }
         end
 

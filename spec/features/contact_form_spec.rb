@@ -2,6 +2,7 @@ require 'rails_helper'
 
 feature 'users can send feedback on the contact page' do
   scenario 'not logged in, sends feedback' do
+    ActionMailer::Base.deliveries.clear
     visit '/contact'
     fill_in 'full_name', with: 'Eric Vahid'
     fill_in 'email', with: 'eric@example.com'
