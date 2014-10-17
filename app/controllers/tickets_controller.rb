@@ -28,7 +28,9 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
+    n = params[:number_of_tickets].to_i
     @ticket = Ticket.new(ticket_params)
+
     respond_to do |format|
       if @ticket.save
         @ticket.qrcode = "http://gnome2home.herokuapp.com/scan/ticket?ticket_id=#{@ticket.id}"
@@ -36,13 +38,31 @@ class TicketsController < ApplicationController
         @ticket.van.save
         @ticket.save
         Recipt.send_recipt(@ticket).deliver
-        format.html { redirect_to @ticket, notice: 'Thank you for riding Gnome2Home. You will receive an email shortly with your QR code and confirmation number' }
-        format.json { render :show, status: :created, location: @ticket }
+        (n-1).times do
+          ticket = Ticket.new(ticket_params)
+          ticket.save
+          ticket.qrcode = "http://gnome2home.herokuapp.com/scan/ticket?ticket_id=#{ticket.id}"
+          ticket.van.seats_available -= 1
+          ticket.van.save
+          ticket.save
+          Recipt.send_recipt(ticket).deliver
+        end
+
+        if n == 1
+          format.html { redirect_to @ticket, notice: 'Thank you for riding Gnome2Home. You will receive an email shortly with your QR code and confirmation number' }
+          format.json { render :show, status: :created, location: @ticket }
+        else
+          format.html { redirect_to edit_passenger_registration_path, notice: "Thanks for buying #{n} tickets. You can view all of you purchased tickets below. You will receive #{n} separate emails, each with a unique QR code ticket. Please"}
+          format.json { render :show, status: :created, location: @ticket }
+        end
+
       else
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PATCH/PUT /tickets/1

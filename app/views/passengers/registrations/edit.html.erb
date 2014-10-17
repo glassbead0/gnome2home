@@ -37,7 +37,11 @@
             <td><%= ticket.id %></td>
             <td><%= ticket.van.departure_time_readable %></td>
             <td><%= link_to 'Show Details', ticket, class: 'btn btn-info btn-xs' %></td>
-            <td><%= link_to 'Cancel Ticket', ticket, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you sure you want to cancel your ticket?'} %></td>
+            <% if ticket.scanned %>
+              <td> <div class="btn btn-success btn-xs">Write a Review</div> </td>
+            <% else %>
+              <td><%= link_to 'Cancel Ticket', ticket, method: :delete, class: 'btn btn-danger btn-xs', data: { confirm: 'Are you sure you want to cancel your ticket?'} %></td>
+            <% end %>
           </tr>
           <% end %>
         </tbody>

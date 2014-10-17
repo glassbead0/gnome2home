@@ -12,71 +12,149 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :first_name, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.text_field :first_name, :class => "form-control", value: current_passenger.first_name %>
-    </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :last_name, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.text_field :last_name, :class => "form-control", value: current_passenger.last_name%>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-4">
-      <%= f.email_field :email, :class => "form-control", value: current_passenger.email %>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <%= f.label :departs_from, :class => "col-sm-2 control-label" %>
-    <div class="col-sm-3">
-      <div class="btn btn-default"><%= @van.departure_time_readable %></div>
-    </div>
-  </div>
   <div class="row">
-    <div class="table-responsive col-sm-6 col-sm-offset-2">
-      <table class="table table-striped table-bordered table-hover">
-        <thead>
-        <tr>
-          <% if @van.direction == 'S' %>
-            <th>CSU</th>
-            <th>Harmony Rd</th>
-            <th>Thornton</th>
-            <th>Union Station</th>
-          <% else %>
-            <th>Union Station</th>
-            <th>Thornton</th>
-            <th>Harmony Rd</th>
-            <th>CSU</th>
-          <% end %>
-        </tr>
-        </thead>
+    <div class="col-sm-6">
+      <div class="form-group">
+        <%= f.label :first_name, :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :first_name, :class => "form-control", value: current_passenger.first_name %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :last_name, :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :last_name, :class => "form-control", value: current_passenger.last_name%>
+        </div>
+      </div>
 
-        <tbody>
-          <% @van.stops.each do |stop| %>
-            <td>
-              <%= stop.time.strftime('%l:%M %P') %>
-            </td>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="form-group">
+        <%= f.label :email, :class => "col-sm-4 control-label" %>
+        <div class="col-sm-8">
+          <%= f.email_field :email, :class => "form-control", value: current_passenger.email %>
+        </div>
+      </div>
     </div>
+
+    <div class="col-sm-6">
+      <div class="form-group row">
+        <%= f.label :departs_from, :class => "col-sm-2 control-label" %>
+        <div class="col-sm-3">
+          <div class="btn btn-default"><%= @van.departure_time_readable %></div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="table-responsive col-sm-9">
+          <table class="table table-striped table-bordered table-hover">
+            <thead>
+            <tr>
+              <% if @van.direction == 'S' %>
+                <th>CSU</th>
+                <th>Harmony Rd</th>
+                <th>Thornton</th>
+                <th>Union Station</th>
+              <% else %>
+                <th>Union Station</th>
+                <th>Thornton</th>
+                <th>Harmony Rd</th>
+                <th>CSU</th>
+              <% end %>
+            </tr>
+            </thead>
+
+            <tbody>
+              <% @van.stops.each do |stop| %>
+                <td>
+                  <%= stop.time.strftime('%l:%M %P') %>
+                </td>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+  <!--MULTIPLE ENTRY FORMS FOR MULTIPLE TICKETS-->
+  <!--<div class="row">-->
+
+    <!--<div class="col-sm-6">-->
+      <!--<h4 class="col-sm-offset-4">Ticket #2</h4>-->
+      <!--<div class="form-group">-->
+        <!--<%# f.label :first_name, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.text_field :first_name, :class => "form-control", value: current_passenger.first_name %>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<%# f.label :last_name, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.text_field :last_name, :class => "form-control", value: current_passenger.last_name%>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="form-group">-->
+        <!--<%# f.label :email, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.email_field :email, :class => "form-control", value: current_passenger.email %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-sm-7"></div>-->
+    <!--<div class="col-sm-6">-->
+      <!--<h4 class="col-sm-offset-4">Ticket #2</h4>-->
+      <!--<div class="form-group">-->
+        <!--<%# f.label :first_name, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.text_field :first_name, :class => "form-control", value: current_passenger.first_name %>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="form-group">-->
+        <!--<%# f.label :last_name, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.text_field :last_name, :class => "form-control", value: current_passenger.last_name%>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <!--<div class="form-group">-->
+        <!--<%# f.label :email, :class => "col-sm-4 control-label" %>-->
+        <!--<div class="col-sm-8">-->
+          <!--<%# f.email_field :email, :class => "form-control", value: current_passenger.email %>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-sm-7"></div>-->
+
+  <!--</div>-->
 
 
   <%= f.hidden_field :van_id, value: params[:van_id]  %>
   <%= f.hidden_field :passenger_id, value: current_passenger.id  %>
   <div class="form-group row">
-    <div class="col-sm-offset-2 col-sm-2">
+    <%= label_tag :number_of_tickets, nil, class: 'control-label col-sm-2' %>
+    <div class="col-sm-1">
+      <%= select_tag :number_of_tickets, options_for_select((1..@van.seats_available).to_a), onchange: 'updatePrice();', class: 'form-control' %>
+    </div>
+    <div class="col-sm-1 bs-callout bs-callout-success">
+      Price $<span id="price"></span>
+    </div>
+    <div class="col-sm-2">
       <%= f.submit 'Buy Ticket', :class => "btn btn-success btn-lg" %>
     </div>
-    <div class="col-sm-6 alert alert-danger">
-      This Business is not running yet. If you click 'Buy Ticket', You will receive a test email ticket
-    </div>
+
   </div>
 <% end %>
+
+<script type="text/javascript">
+  function updatePrice() {
+    var numberOfTickets = document.getElementById('number_of_tickets').value;
+    var price = document.getElementById('price');
+    price.textContent = numberOfTickets * 15;
+  }
+
+  $(document).ready(function(){
+    updatePrice();
+  })
+</script>
